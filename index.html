@@ -59,26 +59,30 @@
         .sidebar ul li {
             margin-bottom: 2px;
         }
+        /* Жестко убираем любые рамки, обводки и фоны у кнопок */
         .sidebar ul li button {
             display: block;
             width: 100%;
             text-align: left;
             padding: 8px 10px;
             color: #4b5563;
-            background: none;
-            border: none;
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
             font-size: 0.9rem;
             border-radius: 4px;
             cursor: pointer;
             transition: 0.2s;
             font-family: inherit;
+            box-shadow: none !important;
+            -webkit-appearance: none;
         }
         .sidebar ul li button:hover {
-            background-color: #eaecef;
+            background-color: #eaecef !important;
             color: #0d1117;
         }
         .sidebar ul li button.active {
-            background-color: #e2e8f0;
+            background-color: #e2e8f0 !important;
             color: #2563eb;
             font-weight: bold;
         }
@@ -91,11 +95,9 @@
             width: calc(100% - 260px);
         }
         
-        /* Блоки страниц, изначально скрытые */
         .page-doc {
             display: none;
         }
-        /* Показываем только активную страницу */
         .page-doc.active-page {
             display: block;
         }
@@ -254,8 +256,5 @@
 
     </div>
 
-    <!-- Интерактивный JavaScript скрипт переключения -->
     <script>
         function showPage(pageId) {
-            // 1. Скрываем все страницы документации
-            const pages = document.querySelectorAll('.page-doc');
