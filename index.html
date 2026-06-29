@@ -15,7 +15,6 @@
             min-height: 100vh;
         }
         
-        /* Левое меню как у Metasploit */
         .sidebar {
             width: 260px;
             background-color: #f5f6f7;
@@ -28,7 +27,6 @@
             overflow-y: auto;
         }
         
-        /* Пафосный логотип REIZE на основе твоего значка */
         .brand {
             display: flex;
             align-items: center;
@@ -58,26 +56,33 @@
             padding: 0;
             margin: 0;
         }
-        .sidebar ul li a {
+        .sidebar ul li {
+            margin-bottom: 2px;
+        }
+        .sidebar ul li button {
             display: block;
+            width: 100%;
+            text-align: left;
             padding: 8px 10px;
             color: #4b5563;
-            text-decoration: none;
+            background: none;
+            border: none;
             font-size: 0.9rem;
             border-radius: 4px;
+            cursor: pointer;
             transition: 0.2s;
+            font-family: inherit;
         }
-        .sidebar ul li a:hover {
+        .sidebar ul li button:hover {
             background-color: #eaecef;
             color: #0d1117;
         }
-        .sidebar ul li a.active {
+        .sidebar ul li button.active {
             background-color: #e2e8f0;
             color: #2563eb;
             font-weight: bold;
         }
 
-        /* Правая контентная область */
         .content {
             margin-left: 260px;
             padding: 40px 60px;
@@ -85,6 +90,16 @@
             box-sizing: border-box;
             width: calc(100% - 260px);
         }
+        
+        /* Блоки страниц, изначально скрытые */
+        .page-doc {
+            display: none;
+        }
+        /* Показываем только активную страницу */
+        .page-doc.active-page {
+            display: block;
+        }
+
         h1 {
             font-size: 2.2rem;
             color: #0d1117;
@@ -105,7 +120,6 @@
             font-size: 1rem;
         }
         
-        /* Синяя командная строка Metasploit-style */
         .cmd-box {
             background-color: #2563eb;
             color: #ffffff;
@@ -154,7 +168,6 @@
     <!-- Меню сайдбар -->
     <div class="sidebar">
         <div class="brand">
-            <!-- Твой фирменный векторный знак бесконечности-глаза REIZE -->
             <div class="reize-logo">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org" style="filter: drop-shadow(0px 0px 2px #ff0055);">
                     <path d="M12 7C9.24 7 7 9.24 7 12C7 14.76 9.24 17 12 17C14.76 17 17 14.76 17 12C17 9.24 14.76 7 12 7ZM12 15C10.34 15 9 13.66 9 12C9 10.34 10.34 9 12 9C13.66 9 15 10.34 15 12C15 13.66 13.66 15 12 15Z" fill="#00ff00"/>
@@ -166,48 +179,83 @@
         
         <div class="menu-title">Начиная</div>
         <ul>
-            <li><a href="#" class="active">Установка на Linux</a></li>
-            <li><a href="#">Обновление системы</a></li>
-            <li><a href="#">Сообщение об ошибке</a></li>
+            <li><button onclick="showPage('install')" id="btn-install" class="active">Установка на Linux</button></li>
+            <li><button onclick="showPage('update')" id="btn-update">Обновление системы</button></li>
         </ul>
         
         <div class="menu-title">Основы</div>
         <ul>
-            <li><a href="#">Запущенные модули</a></li>
-            <li><a href="#">Как использовать REIZE</a></li>
-            <li><a href="#">Документация модуля dir</a></li>
-            <li><a href="#">Документация модуля vuln</a></li>
-        </ul>
-
-        <div class="menu-title">Средний уровень</div>
-        <ul>
-            <li><a href="#">Поиск скрытых админок</a></li>
-            <li><a href="#">Сигнатурные шаблоны</a></li>
-            <li><a href="#">Сканирование по сокетам</a></li>
+            <li><button onclick="showPage('modules')" id="btn-modules">Запущенные модули</button></li>
+            <li><button onclick="showPage('dir')" id="btn-dir">Документация модуля dir</button></li>
+            <li><button onclick="showPage('vuln')" id="btn-vuln">Документация модуля vuln</button></li>
         </ul>
     </div>
 
     <!-- Основной текст документации -->
     <div class="content">
-        <h1>Установка REIZE на Linux (Kali Linux)</h1>
-        <p>Следующий скрипт клонирует официальный репозиторий проекта, подтянет актуальные конфигурации и настроит бинарный пакет для вашей системы Linux:</p>
         
-        <!-- Синяя командная строка -->
-        <div class="cmd-box">
-            git clone https://github.com && cd Reize && sudo dpkg -i reize_v5.5.0_amd64.deb
+        <!-- СТРАНИЦА 1: Установка -->
+        <div id="page-install" class="page-doc active-page">
+            <h1>Установка REIZE на Linux (Kali Linux)</h1>
+            <p>Следующий скрипт клонирует официальный репозиторий проекта, подтянет актуальные конфигурации и настроит бинарный пакет для вашей системы Linux:</p>
+            <div class="cmd-box">
+                git clone https://github.com && cd Reize && sudo dpkg -i reize_v5.5.0_amd64.deb
+            </div>
+            <p>После успешной установки вы можете запустить интерактивную хакерскую консоль, введя команду <code>reize</code> из любого окна терминала.</p>
+            <h2>Ручная установка пакета Linux</h2>
+            <div class="download-section">
+                <h3 style="margin-top:0; color:#0d1117;">Официальный дистрибутив v5.5.0</h3>
+                <a href="https://github.com" class="download-btn">Скачать .DEB пакет REIZE</a>
+            </div>
         </div>
 
-        <p>После успешной установки вы можете запустить интерактивную хакерскую консоль, введя команду <code>reize</code> из любого окна терминала. При первом запуске утилита автоматически развернет многопоточные движки и подготовит JSON-шаблоны уязвимостей.</p>
-        
-        <h2>Ручная установка пакета Linux</h2>
-        <p>Пакеты сборки компилируются для архитектур систем <code>amd64</code> (64-битные x86). Вы можете скачать готовый закрытый релиз (Closed Source Edition) напрямую через кнопку ниже:</p>
-        
-        <div class="download-section">
-            <h3 style="margin-top:0; color:#0d1117;">Официальный дистрибутив v5.5.0</h3>
-            <p style="margin-bottom: 15px; color:#64748b;">Пакет содержит предкомпилированный зашифрованный бинарный софт для защиты от плагиата.</p>
-            <a href="https://github.com" class="download-btn">Скачать .DEB пакет REIZE</a>
+        <!-- СТРАНИЦА 2: Обновление -->
+        <div id="page-update" class="page-doc">
+            <h1>Обновление REIZE до v5.5.0</h1>
+            <p>Чтобы обновить утилиту до самой свежей закрытой сборки без потери локальных конфигурационных файлов и шаблонов, выполните форсированный пулл пакета:</p>
+            <div class="cmd-box">
+                cd ~/Reize && git pull origin main --force && sudo dpkg -i reize_v5.5.0_amd64.deb
+            </div>
+            <p>Движок автоматически проверит целостность базы данных сигнатур и перезапустит фоновые процессы сканирования.</p>
         </div>
+
+        <!-- СТРАНИЦА 3: Запущенные модули -->
+        <div id="page-modules" class="page-doc">
+            <h1>Архитектура и модули REIZE</h1>
+            <p>Платформа работает по модульному принципу. При запуске основного ядра инициализируются три независимых подсистемы разведки:</p>
+            <ul>
+                <li><strong>Модуль DIR</strong> — 50-поточный скоростной фаззер скрытой веб-структуры.</li>
+                <li><strong>Модуль VULN</strong> — Движок сигнатурного анализа уязвимостей по JSON-шаблонам.</li>
+                <li><strong>Модуль INTEL</strong> — OSINT-разведка узлов, WHOIS и гео-трассировка IP.</li>
+            </ul>
+        </div>
+
+        <!-- СТРАНИЦА 4: Модуль DIR -->
+        <div id="page-dir" class="page-doc">
+            <h1>Документация: Модуль DIR (DirBuster)</h1>
+            <p>Предназначен для быстрого поиска скрытых административных панелей, логов и бэкапов на целевом сервере. Работает на базе низкоуровневых SSL-сокетов.</p>
+            <h2>Пример использования команды:</h2>
+            <div class="cmd-box">
+                reize dir ://vulnweb.com
+            </div>
+            <p>Флаг автоматической очереди <code>Queue</code> распределяет запросы параллельно, исключая блокировку сетевого интерфейса Kali Linux.</p>
+        </div>
+
+        <!-- СТРАНИЦА 5: Модуль VULN -->
+        <div id="page-vuln" class="page-doc">
+            <h1>Документация: Модуль VULN (Сканер Брешей)</h1>
+            <p>Основной боевой движок платформы. Он считывает кастомные JSON-шаблоны из системной папки и проверяет заголовки, куки и ответы серверов на наличие критических уязвимостей.</p>
+            <h2>Запуск сканирования уязвимостей:</h2>
+            <div class="cmd-box">
+                reize vuln target-site.com
+            </div>
+            <p>Вы можете расширять базу данных сканера, просто добавляя новые JSON-файлы сигнатур в каталог программы.</p>
+        </div>
+
     </div>
 
-</body>
-</html>
+    <!-- Интерактивный JavaScript скрипт переключения -->
+    <script>
+        function showPage(pageId) {
+            // 1. Скрываем все страницы документации
+            const pages = document.querySelectorAll('.page-doc');
