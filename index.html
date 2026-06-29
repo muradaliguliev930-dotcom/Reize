@@ -3,103 +3,199 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>REIZE Platform v5.5.0</title>
+    <title>Документация REIZE Platform v5.5.0</title>
     <style>
         body {
-            background-color: #0a0a0a;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            min-height: 100vh;
-            padding: 40px;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
-            flex-direction: column;
+            background-color: #ffffff;
+            color: #272c30;
+            min-height: 100vh;
+        }
+        
+        /* Левое меню как у Metasploit */
+        .sidebar {
+            width: 260px;
+            background-color: #f5f6f7;
+            border-right: 1px solid #e1e4e6;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+        .brand {
+            display: flex;
             align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #0d1117;
+            margin-bottom: 25px;
+            padding-left: 5px;
+        }
+        .brand::before {
+            content: "💀";
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+        .menu-title {
+            font-size: 0.8rem;
+            color: #8c95a0;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 0 10px 5px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
             margin: 0;
         }
-        header {
-            border-bottom: 1px solid #00ff00;
-            width: 100%;
-            max-width: 900px;
-            padding-bottom: 20px;
-            text-align: center;
+        .sidebar ul li a {
+            display: block;
+            padding: 8px 10px;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+        .sidebar ul li a:hover {
+            background-color: #eaecef;
+            color: #0d1117;
+        }
+        .sidebar ul li a.active {
+            background-color: #e2e8f0;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        /* Правая контентная область */
+        .content {
+            margin-left: 260px;
+            padding: 40px 60px;
+            max-width: 850px;
+            box-sizing: border-box;
+            width: calc(100% - 260px);
         }
         h1 {
-            font-size: 3rem;
-            letter-spacing: 4px;
-            text-shadow: 0 0 10px #00ff00;
-            margin: 0;
+            font-size: 2.2rem;
+            color: #0d1117;
+            margin-top: 0;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 10px;
         }
-        .main-card {
-            width: 100%;
-            max-width: 900px;
-            margin-top: 50px;
-            text-align: center;
+        h2 {
+            font-size: 1.5rem;
+            color: #1f2328;
+            margin-top: 35px;
+            border-bottom: 1px solid #eff1f3;
+            padding-bottom: 8px;
         }
-        .card-body {
-            border: 1px solid #00ff00;
-            padding: 30px;
-            border-radius: 5px;
-            background-color: #111;
-            box-shadow: 0 0 15px rgba(0,255,0,0.1);
+        p {
+            line-height: 1.6;
+            color: #3c434a;
+            font-size: 1rem;
         }
-        h2 { color: #fff; margin-bottom: 20px; }
-        p { color: #aaa; line-height: 1.6; }
+        
+        /* Синяя хакерская командная строка как на скриншоте */
+        .cmd-box {
+            background-color: #3b82f6;
+            color: #ffffff;
+            padding: 15px 20px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+            word-wrap: break-word;
+        }
+        
+        /* Серый блок системных путей */
+        code {
+            background-color: #eff1f3;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #cf222e;
+        }
+        .download-section {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
         .download-btn {
             display: inline-block;
-            margin-top: 30px;
-            background-color: #00ff00;
-            color: #000;
-            padding: 15px 40px;
-            font-size: 1.2rem;
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 24px;
             font-weight: bold;
             text-decoration: none;
-            border-radius: 3px;
-            box-shadow: 0 0 10px #00ff00;
-            transition: 0.3s;
+            border-radius: 6px;
+            transition: 0.2s;
+            margin-top: 10px;
         }
         .download-btn:hover {
-            box-shadow: 0 0 20px #00ff00;
-            background-color: #12cf12;
-        }
-        .terminal-box {
-            margin-top: 40px;
-            text-align: left;
-        }
-        pre {
-            background-color: #111;
-            border-left: 3px solid #00ff00;
-            padding: 15px;
-            color: #00ff00;
-            overflow-x: auto;
-            font-size: 1rem;
+            background-color: #1d4ed8;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>REIZE v5.5.0</h1>
-        <p style="color: #888; font-size: 1.1rem; margin-top: 10px;">ULTIMATE CYBER INTELLIGENCE & SIGNATURE VULNERABILITY FRAMEWORK</p>
-    </header>
 
-    <main class="main-card">
-        <div class="card-body">
-            <h2>Защищенный закрытый релиз (Closed Source Edition)</h2>
-            <p>
-                Платформа REIZE укомплектована многопоточным SSL-брутфорсером скрытых директорий и интеллектуальным сигнатурным движком поиска критических уязвимостей по JSON-шаблонам. Исходный код закомпилирован для предотвращения плагиата.
-            </p>
-            <a href="https://github.com" class="download-btn">
-                DOWNLOAD .DEB PACKAGE
-            </a>
+    <!-- Меню сайдбар -->
+    <div class="sidebar">
+        <div class="brand">REIZE Platform</div>
+        
+        <div class="menu-title">Начиная</div>
+        <ul>
+            <li><a href="#" class="active">Установка на Linux</a></li>
+            <li><a href="#">Обновление системы</a></li>
+            <li><a href="#">Сообщение об ошибке</a></li>
+        </ul>
+        
+        <div class="menu-title">Основы</div>
+        <ul>
+            <li><a href="#">Запущенные модули</a></li>
+            <li><a href="#">Как использовать REIZE</a></li>
+            <li><a href="#">Документация модуля dir</a></li>
+            <li><a href="#">Документация модуля vuln</a></li>
+        </ul>
+
+        <div class="menu-title">Средний уровень</div>
+        <ul>
+            <li><a href="#">Поиск скрытых админок</a></li>
+            <li><a href="#">Сигнатурные шаблоны</a></li>
+            <li><a href="#">Сканирование по сокетам</a></li>
+        </ul>
+    </div>
+
+    <!-- Основной текст документации -->
+    <div class="content">
+        <h1>Установка REIZE на Linux (Kali Linux)</h1>
+        <p>Следующий скрипт клонирует официальный репозиторий проекта, подтянет актуальные конфигурации и настроит бинарный пакет для вашей системы Linux:</p>
+        
+        <!-- Синяя командная строка -->
+        <div class="cmd-box">
+            git clone https://github.com && cd Reize && sudo dpkg -i reize_v5.5.0_amd64.deb
         </div>
 
-        <div class="terminal-box">
-            <h3 style="color: #fff;">⚡ Быстрая установка в Kali Linux:</h3>
-            <pre>git clone https://github.com<br>cd Reize<br>sudo dpkg -i reize_v5.5.0_amd64.deb</pre>
+        <p>После успешной установки вы можете запустить интерактивную хакерскую консоль, введя команду <code>reize</code> из любого окна терминала. При первом запуске утилита автоматически развернет многопоточные движки и подготовит JSON-шаблоны уязвимостей.</p>
+        
+        <h2>Ручная установка пакета Linux</h2>
+        <p>Пакеты сборки компилируются для архитектур систем <code>amd64</code> (64-битные x86). Вы можете скачать готовый закрытый релиз (Closed Source Edition) напрямую через кнопку ниже:</p>
+        
+        <div class="download-section">
+            <h3 style="margin-top:0; color:#0d1117;">Официальный дистрибутив v5.5.0</h3>
+            <p style="margin-bottom: 15px; color:#64748b;">Пакет содержит предкомпилированный зашифрованный бинарный софт для защиты от плагиата.</p>
+            <a href="https://github.com" class="download-btn">Скачать .DEB пакет REIZE</a>
         </div>
-    </main>
+    </div>
 
-    <footer style="margin-top: auto; padding-top: 40px; color: #555; font-size: 0.9rem;">
-        Copyright (c) 2026 REIZE Security Platform. MIT License.
-    </footer>
 </body>
 </html>
