@@ -1,29 +1,36 @@
-# REIZE (v3.1.0)
+# REIZE (v5.5.0)
 
-REIZE is an interactive, high-performance Cyberstalker OSINT & Network Scan Framework built in Python for penetration testing, host discovery, and intelligence gathering.
+REIZE — это интерактивная высокопроизводительная платформа для киберразведки, глубокого OSINT-анализа сети и аудита безопасности веб-ресурсов, разработанная на Python. Предназначена для использования в средах Kali Linux и Debian.
 
-## 🚀 Key Features
-- **Interactive CLI Shell**: Boots directly into a dedicated Metasploit-style console environment (`reize > `) with a custom command parser.
-- **Raw Socket OSINT Engine**: Performs live network reconnaissance (`myip` and `site <domain>`) using low-level TCP/IP sockets to bypass proxies and virtual environments.
-- **Multithreaded Network Scanner**: Rapidly discovers active hosts across subnets using Python's `threading` and concurrent queuing.
-- **Graceful Error Handling**: Complete crash protection, ensuring clean exits on `Ctrl+C` without tracebacks.
-- **Native Package Support**: Fully compatible with Debian/Kali Linux packagers for conversion into a native `.deb` system package.
+## 🚀 Ключевые особенности
 
-## 🛠️ Global Subcommands inside CLI
-- `help` - Show framework manual and active modules.
-- `myip` - Run an OSINT check on your local and external network interface.
-- `site <domain>` - Gather live intelligence on any target website (DNS resolution, geo-location, hosting provider, and WAF firewall analysis).
-- `scan <subnet>` - Launch a fast multi-threaded port scan across a subnet range.
-- `banner` - Clear the terminal and output the signature red cyberpunk ASCII logo.
-- `exit` - Close the active shell session and safely terminate background threads.
+* **Интерактивная оболочка REIZE**: Загружается непосредственно в выделенную консольную среду в стиле Metasploit (`reize >`) с пользовательским парсером команд.
+* **Глубокий OSINT-движок**: Выполняет детальную разведку инфраструктуры, DNS-резолв и геолокацию серверов целей (`site` и `intel`) через низкоуровневые сокеты.
+* **Аудит веб-безопасности (SSL/HTTPS)**: Автоматический сбор HTTP-заголовков безопасности (`headers`) и поиск скрытых директорий через анализ `robots.txt` (`robots`) по защищенному 443 порту.
+* **Многопоточный брутфорс (Fuzzer)**: Быстрый перебор скрытых папок и админок сайта в 50 потоков (`dir`).
+* **Интеллектуальный сигнатурный сканер**: Проверка целей на критические уязвимости по кастомным JSON-шаблонам (`vuln`) в стиле Nuclei.
 
-## 📦 Local Installation
+## 🛠️ Доступные модули
+* `help` - Вызов интерактивного руководства пользователя.
+* `myip` - Экспресс-анализ параметров вашего внешнего сетевого подключения.
+* `site <домен>` - Сбор базовой информации (DNS-резолв, провайдер, геолокация хостинга).
+* `intel <домен>` - Многовекторное картирование скрытой инфраструктуры и поддоменов.
+* `headers <домен>` - Чтение и анализ HTTP-заголовков безопасности веб-сервера по SSL (443 порт).
+* `robots <домен>` - Сканирование директорий и обнаружение путей, закрытых от индексации.
+* `dir <домен>` - Многопоточный SSL-брутфорс скрытых директорий по словарю.
+* `vuln <домен>` - Сигнатурный сканер уязвимостей по JSON-шаблонам.
+
+## 📥 Инструкция по установке (Deployment)
+
 ```bash
-git clone https://github.com/muradaliguliev930-dotcom/Reize.git
-cd Reize
+git clone https://github.com,
+cd Reize,
+chmod +x net_scanner.py,
 python3 net_scanner.py
 ```
 
-## 📜 License
-MIT License
+## ⚖️ Лицензия (License)
 
+Проект REIZE распространяется под эгидой свободной международной лицензии **MIT License**.
+
+Copyright (c) 2026 muradaliguliev930-dotcom. All rights reserved.
