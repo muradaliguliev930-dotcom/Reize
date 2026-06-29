@@ -15,6 +15,7 @@
             min-height: 100vh;
         }
         
+        /* Левое меню сайдбар один в один как у Metasploit */
         .sidebar {
             width: 260px;
             background-color: #f5f6f7;
@@ -59,34 +60,28 @@
         .sidebar ul li {
             margin-bottom: 2px;
         }
-        /* Жестко убираем любые рамки, обводки и фоны у кнопок */
-        .sidebar ul li button {
+        /* Идеальные плоские текстовые ссылки без рамок */
+        .sidebar ul li a {
             display: block;
-            width: 100%;
-            text-align: left;
             padding: 8px 10px;
             color: #4b5563;
-            background: transparent !important;
-            border: none !important;
-            outline: none !important;
+            text-decoration: none;
             font-size: 0.9rem;
             border-radius: 4px;
             cursor: pointer;
             transition: 0.2s;
-            font-family: inherit;
-            box-shadow: none !important;
-            -webkit-appearance: none;
         }
-        .sidebar ul li button:hover {
-            background-color: #eaecef !important;
+        .sidebar ul li a:hover {
+            background-color: #eaecef;
             color: #0d1117;
         }
-        .sidebar ul li button.active {
-            background-color: #e2e8f0 !important;
+        .sidebar ul li a.active {
+            background-color: #e2e8f0;
             color: #2563eb;
             font-weight: bold;
         }
 
+        /* Правая текстовая зона */
         .content {
             margin-left: 260px;
             padding: 40px 60px;
@@ -95,10 +90,11 @@
             width: calc(100% - 260px);
         }
         
+        /* Скрываем страницы до переключения */
         .page-doc {
             display: none;
         }
-        .page-doc.active-page {
+        .page-doc:target, .page-doc.default-page {
             display: block;
         }
 
@@ -122,6 +118,7 @@
             font-size: 1rem;
         }
         
+        /* Синяя хакерская строка */
         .cmd-box {
             background-color: #2563eb;
             color: #ffffff;
@@ -181,23 +178,23 @@
         
         <div class="menu-title">Начиная</div>
         <ul>
-            <li><button onclick="showPage('install')" id="btn-install" class="active">Установка на Linux</button></li>
-            <li><button onclick="showPage('update')" id="btn-update">Обновление системы</button></li>
+            <li><a href="#install" class="menu-link active">Установка на Linux</a></li>
+            <li><a href="#update" class="menu-link">Обновление системы</a></li>
         </ul>
         
         <div class="menu-title">Основы</div>
         <ul>
-            <li><button onclick="showPage('modules')" id="btn-modules">Запущенные модули</button></li>
-            <li><button onclick="showPage('dir')" id="btn-dir">Документация модуля dir</button></li>
-            <li><button onclick="showPage('vuln')" id="btn-vuln">Документация модуля vuln</button></li>
+            <li><a href="#modules" class="menu-link">Запущенные модули</a></li>
+            <li><a href="#dir" class="menu-link">Документация модуля dir</a></li>
+            <li><a href="#vuln" class="menu-link">Документация модуля vuln</a></li>
         </ul>
     </div>
 
-    <!-- Основной текст документации -->
+    <!-- Текстовая область -->
     <div class="content">
         
         <!-- СТРАНИЦА 1: Установка -->
-        <div id="page-install" class="page-doc active-page">
+        <div id="install" class="page-doc default-page">
             <h1>Установка REIZE на Linux (Kali Linux)</h1>
             <p>Следующий скрипт клонирует официальный репозиторий проекта, подтянет актуальные конфигурации и настроит бинарный пакет для вашей системы Linux:</p>
             <div class="cmd-box">
@@ -212,7 +209,7 @@
         </div>
 
         <!-- СТРАНИЦА 2: Обновление -->
-        <div id="page-update" class="page-doc">
+        <div id="update" class="page-doc">
             <h1>Обновление REIZE до v5.5.0</h1>
             <p>Чтобы обновить утилиту до самой свежей закрытой сборки без потери локальных конфигурационных файлов и шаблонов, выполните форсированный пулл пакета:</p>
             <div class="cmd-box">
@@ -222,7 +219,7 @@
         </div>
 
         <!-- СТРАНИЦА 3: Запущенные модули -->
-        <div id="page-modules" class="page-doc">
+        <div id="modules" class="page-doc">
             <h1>Архитектура и модули REIZE</h1>
             <p>Платформа работает по модульному принципу. При запуске основного ядра инициализируются три независимых подсистемы разведки:</p>
             <ul>
@@ -233,7 +230,7 @@
         </div>
 
         <!-- СТРАНИЦА 4: Модуль DIR -->
-        <div id="page-dir" class="page-doc">
+        <div id="dir" class="page-doc">
             <h1>Документация: Модуль DIR (DirBuster)</h1>
             <p>Предназначен для быстрого поиска скрытых административных панелей, логов и бэкапов на целевом сервере. Работает на базе низкоуровневых SSL-сокетов.</p>
             <h2>Пример использования команды:</h2>
@@ -244,7 +241,7 @@
         </div>
 
         <!-- СТРАНИЦА 5: Модуль VULN -->
-        <div id="page-vuln" class="page-doc">
+        <div id="vuln" class="page-doc">
             <h1>Документация: Модуль VULN (Сканер Брешей)</h1>
             <p>Основной боевой движок платформы. Он считывает кастомные JSON-шаблоны из системной папки и проверяет заголовки, куки и ответы серверов на наличие критических уязвимостей.</p>
             <h2>Запуск сканирования уязвимостей:</h2>
@@ -256,5 +253,10 @@
 
     </div>
 
+    <!-- Чистый скрипт управления подсветкой меню без багов -->
     <script>
-        function showPage(pageId) {
+        const links = document.querySelectorAll('.menu-link');
+        const pages = document.querySelectorAll('.page-doc');
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
