@@ -1,14 +1,105 @@
 <!doctype html>
-<html lang="en">
-  <head>
+<html lang="ru">
+<head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-    <script type="module" crossorigin src="./assets/index-Du6EjHzo.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-nqMpL4T3.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+    <title>REIZE Platform v5.5.0</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+        header {
+            border-bottom: 1px solid #00ff00;
+            width: 100%;
+            max-width: 900px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px #00ff00;
+            margin: 0;
+        }
+        .main-card {
+            width: 100%;
+            max-width: 900px;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .card-body {
+            border: 1px solid #00ff00;
+            padding: 30px;
+            border-radius: 5px;
+            background-color: #111;
+            box-shadow: 0 0 15px rgba(0,255,0,0.1);
+        }
+        h2 { color: #fff; margin-bottom: 20px; }
+        p { color: #aaa; line-height: 1.6; }
+        .download-btn {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: #00ff00;
+            color: #000;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 3px;
+            box-shadow: 0 0 10px #00ff00;
+            transition: 0.3s;
+        }
+        .download-btn:hover {
+            box-shadow: 0 0 20px #00ff00;
+            background-color: #12cf12;
+        }
+        .terminal-box {
+            margin-top: 40px;
+            text-align: left;
+        }
+        pre {
+            background-color: #111;
+            border-left: 3px solid #00ff00;
+            padding: 15px;
+            color: #00ff00;
+            overflow-x: auto;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>REIZE v5.5.0</h1>
+        <p style="color: #888; font-size: 1.1rem; margin-top: 10px;">ULTIMATE CYBER INTELLIGENCE & SIGNATURE VULNERABILITY FRAMEWORK</p>
+    </header>
+
+    <main class="main-card">
+        <div class="card-body">
+            <h2>Защищенный закрытый релиз (Closed Source Edition)</h2>
+            <p>
+                Платформа REIZE укомплектована многопоточным SSL-брутфорсером скрытых директорий и интеллектуальным сигнатурным движком поиска критических уязвимостей по JSON-шаблонам. Исходный код закомпилирован для предотвращения плагиата.
+            </p>
+            <a href="https://github.com" class="download-btn">
+                DOWNLOAD .DEB PACKAGE
+            </a>
+        </div>
+
+        <div class="terminal-box">
+            <h3 style="color: #fff;">⚡ Быстрая установка в Kali Linux:</h3>
+            <pre>git clone https://github.com<br>cd Reize<br>sudo dpkg -i reize_v5.5.0_amd64.deb</pre>
+        </div>
+    </main>
+
+    <footer style="margin-top: auto; padding-top: 40px; color: #555; font-size: 0.9rem;">
+        Copyright (c) 2026 REIZE Security Platform. MIT License.
+    </footer>
+</body>
 </html>
