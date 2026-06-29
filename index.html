@@ -27,20 +27,24 @@
             bottom: 0;
             overflow-y: auto;
         }
+        
+        /* Пафосный логотип REIZE на основе твоего значка */
         .brand {
             display: flex;
             align-items: center;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #0d1117;
             margin-bottom: 25px;
             padding-left: 5px;
+            letter-spacing: 1px;
         }
-        .brand::before {
-            content: "💀";
-            margin-right: 10px;
-            font-size: 1.4rem;
+        .reize-logo {
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
         }
+        
         .menu-title {
             font-size: 0.8rem;
             color: #8c95a0;
@@ -101,20 +105,19 @@
             font-size: 1rem;
         }
         
-        /* Синяя хакерская командная строка как на скриншоте */
+        /* Синяя командная строка Metasploit-style */
         .cmd-box {
-            background-color: #3b82f6;
+            background-color: #2563eb;
             color: #ffffff;
             padding: 15px 20px;
             font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
             font-size: 0.95rem;
             border-radius: 6px;
             margin: 20px 0;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
             word-wrap: break-word;
         }
         
-        /* Серый блок системных путей */
         code {
             background-color: #eff1f3;
             padding: 3px 6px;
@@ -150,7 +153,16 @@
 
     <!-- Меню сайдбар -->
     <div class="sidebar">
-        <div class="brand">REIZE Platform</div>
+        <div class="brand">
+            <!-- Твой фирменный векторный знак бесконечности-глаза REIZE -->
+            <div class="reize-logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org" style="filter: drop-shadow(0px 0px 2px #ff0055);">
+                    <path d="M12 7C9.24 7 7 9.24 7 12C7 14.76 9.24 17 12 17C14.76 17 17 14.76 17 12C17 9.24 14.76 7 12 7ZM12 15C10.34 15 9 13.66 9 12C9 10.34 10.34 9 12 9C13.66 9 15 10.34 15 12C15 13.66 13.66 15 12 15Z" fill="#00ff00"/>
+                    <path d="M2 12C2 12 5.6 5 12 5C18.4 5 22 12 22 12C22 12 18.4 19 12 19C5.6 19 2 12 2 12ZM12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5 9.51472 14.4853 7.5 12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5Z" fill="#0d1117" stroke="#2563eb" stroke-width="1.5"/>
+                </svg>
+            </div>
+            REIZE
+        </div>
         
         <div class="menu-title">Начиная</div>
         <ul>
