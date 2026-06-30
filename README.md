@@ -1,29 +1,43 @@
-# REIZE (v3.1.0)
+# REIZE v5.6.0 — Ultimate Cyber Intelligence Platform
 
-REIZE is an interactive, high-performance Cyberstalker OSINT & Network Scan Framework built in Python for penetration testing, host discovery, and intelligence gathering.
+Интерактивная высокопроизводительная платформа для киберразведки, пассивного сканирования сетей, анализа угроз и сбора разведывательной информации (OSINT).
 
-## 🚀 Key Features
-- **Interactive CLI Shell**: Boots directly into a dedicated Metasploit-style console environment (`reize > `) with a custom command parser.
-- **Raw Socket OSINT Engine**: Performs live network reconnaissance (`myip` and `site <domain>`) using low-level TCP/IP sockets to bypass proxies and virtual environments.
-- **Multithreaded Network Scanner**: Rapidly discovers active hosts across subnets using Python's `threading` and concurrent queuing.
-- **Graceful Error Handling**: Complete crash protection, ensuring clean exits on `Ctrl+C` without tracebacks.
-- **Native Package Support**: Fully compatible with Debian/Kali Linux packagers for conversion into a native `.deb` system package.
+## 🚀 Ключевые особенности
+* **Многопоточный сетевой сканер**: быстро обнаруживает активные хосты в подсетях, используя параллельную обработку запросов.
+* **Нативная упаковка**: полная совместимость с дистрибутивами Debian/Kali Linux, развертывание одной командой через автономный системный пакет `.deb`.
+* **Защита исходного кода**: архитектура ядра упакована в закрытый бинарный монолит для защиты интеллектуальной собственности фреймворка.
 
-## 🛠️ Global Subcommands inside CLI
-- `help` - Show framework manual and active modules.
-- `myip` - Run an OSINT check on your local and external network interface.
-- `site <domain>` - Gather live intelligence on any target website (DNS resolution, geo-location, hosting provider, and WAF firewall analysis).
-- `scan <subnet>` - Launch a fast multi-threaded port scan across a subnet range.
-- `banner` - Clear the terminal and output the signature red cyberpunk ASCII logo.
-- `exit` - Close the active shell session and safely terminate background threads.
+## 🛠️ Глобальные подкоманды в командной строке
 
-## 📦 Local Installation
+При запуске оболочки `sudo reize` вам доступны следующие модули и инструменты:
+
+* **help** — Отобразить расширенное руководство по фреймворку и активные модули.
+* **myip** — Провести OSINT-проверку локального и внешнего сетевого интерфейса.
+* **site <domain>** — Сбор оперативной информации о любом целевом веб-сайте (разрешение DNS, геолокация, хостинг-провайдер и анализ брандмауэра WAF).
+* **scan <subnet>** — Запустить быстрое многопоточное сканирование портов в диапазоне подсетей.
+* **banner** — Очистить терминал и вывести фирменный красный ASCII-логотип в стиле киберпанк.
+* **exit** — Закрыть активную оболочку и безопасно завершить фоновые потоки.
+
+### 🛡️ Новые продвинутые модули разведки (v5.6.0)
+* **graph <domain>** — Автоматическое построение интерактивной 3D-карты сетевой инфраструктуры целевого ресурса.
+* **monitor <domain>** — Автономный слепок инфраструктуры и постоянный мониторинг изменений хостов.
+* **shodan_fast <IP>** — Сверхбыстрый пассивный вынос открытых портов и уязвимостей CVE без прямого сканирования цели.
+* **apple_sniff** — Беспроводная радиоразведка BLE: пассивный перехват пакетов Apple Continuity, чтение статусов экрана и уровня заряда батареи iPhone.
+
+## 📦 Установка и запуск на месте (Live-Kali Linux)
+
+Для развертывания платформы на живом железе флешки выполните:
+
 ```bash
-git clone https://github.com/muradaliguliev930-dotcom/Reize.git
+git clone https://github.com/muradaliguliev930-dotcom/Reize
 cd Reize
-python3 net_scanner.py
+sudo dpkg -i reize_v5.6.0_amd64.deb
 ```
 
-## 📜 License
-MIT License
+### 🎯 Запуск платформы:
+```bash
+sudo reize
+```
 
+## 📄 Лицензия
+Данное программное обеспечение распространяется под лицензией **MIT License**. Вы можете свободно использовать, модифицировать и распространять данный фреймворк в исследовательских целях и целях аудита безопасности.
