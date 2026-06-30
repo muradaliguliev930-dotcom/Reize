@@ -7,6 +7,7 @@ import requests
 import time
 import os
 import subprocess
+import struct
 from queue import Queue
 
 class NetworkScanner:
@@ -494,31 +495,27 @@ def cmd_grand_shodan(target):
         print(f"\033[1;31m[-]\033[0m Ошибка подключения к базе Shodan: {e}")
 
 def cmd_apple_sniff():
-    print("\n\033[1;34m[*] REIZE переходит в режим радиоразведки BLE...\033[0m")
-    print("[*] Сканирую фоновые пакеты Apple Continuity (0.5 сек)...")
-    
-    try:
+ print("\n\033[1;34m[*] REIZE переходит в режим радиоразведки BLE...\033[0m")
+ print("[*] Сканирую фоновые пакеты Apple Continuity (0.5 сек)...")
+try:
         # Открываем низкоуровневый сырой сокет для работы с Bluetooth HCI
         sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_RAW, socket.BTPROTO_HCI)
         sock.bind((0,))
-        
-        # Передаем команду контроллеру на включение сканирования
-        sock.send(struct.pack("<HBB", 0x200c, 2, 1, 0)) 
+        # Исправленный формат упаковки: <HBBB (16-бит команда и три 8-битных параметра)
+        sock.send(struct.pack("<HBBB", 0x200c, 2, 1, 0)) 
         sock.settimeout(0.5) # Жесткий тайм-аут на полсекунды
-        
         discovered_devices = 0
-        while True:
+        start_time = time.time()
+        while time.time() - start_time < 0.5:
             try:
                 packet = sock.recv(255)
                 # Ищем сигнатуру Apple в BLE-пакете (Manufacturer Data ID: 0x004C)
                 if b"\x4c\x00" in packet:
                     idx = packet.index(b"\x4c\x00")
                     apple_data = packet[idx+2:]
-                    
                     if len(apple_data) > 2:
                         discovered_devices += 1
                         print(f"\n\033[1;32m[+] Обнаружено устройство Apple #{discovered_devices}\033[0m")
-                        
                         # Парсим тип активности (Continuity Type)
                         activity_type = apple_data[0]
                         if activity_type == 0x07:
@@ -529,28 +526,35 @@ def cmd_apple_sniff():
                             print("  - Status: Вызов FaceTime / Входящий звонок")
                         else:
                             print(f"  - Тип активности: Фоновый BLE-маяк (код {hex(activity_type)})")
-                            
-                        # Вытаскиваем примерный уровень заряда и статус экрана, если пакет полный
+                        # Вытаскиваем уровень заряда и статус экрана
                         if len(apple_data) > 5:
-                            status_byte = apple_data[2]
-                            battery = apple_data[3] & 0x7F
+                            status_byte = apple_data[3]
+                            battery = apple_data[4] & 0x7F
                             screen_on = "Включен" if (status_byte & 0x10) else "Выключен"
                             if 0 <= battery <= 100:
                                 print(f"  - Заряд батареи: {battery}%")
                             print(f"  - Экран устройства: {screen_on}")
             except socket.timeout:
-                break # Время вышло, прекращаем пассивный сниффинг
-                
+                break
         if discovered_devices == 0:
-            print("[-] В радиусе 5-10 метров активных BLE-пакетов Apple не перехвачено.")
+            print("[-] В радиусе видимости активных BLE-пакетов Apple не перехвачено.")
         else:
             print(f"\n[+] Сканирование завершено. Перехвачено устройств: {discovered_devices}")
-            
-    except PermissionError:
+except PermissionError:
         print("\n\033[1;31m[-] Ошибка: Для работы с Bluetooth требуются права root!\033[0m")
-        print("[!] Запусти комбайн через sudo: sudo reize apple_sniff")
-    except Exception as e:
-        print(f"[-] Bluetooth-адаптер недоступен или занят: {e}")
+        print("[!] Запусти комбайн через sudo: sudo reize")
+except Exception as e:
+        # Умный аварийный режим для WSL среды, чтобы скрипт не падал на Windows
+        if "wsl" in open("/proc/version", "r").read().lower() or "[Errno 19]" in str(e) or "[Errno 93]" in str(e):
+            print("\n\033[1;33m[!] Предупреждение: Обнаружена среда WSL. Прямой доступ к Bluetooth ограничен.\033[0m")
+            print("[*] Запускаю REIZE BLE в режиме симуляции пакетов для демонстрации...")
+            time.sleep(0.3)
+            print("\n\033[1;32m[+] Перехвачен фоновый пакет Apple Continuity (Симуляция)\033[0m")
+            print("  - Модель: iPhone (ИБ-Лаборатория REIZE)")
+            print("  - Текущий заряд батареи: 89%")
+            print("  - Экран устройства: Активен (Включен)")
+        else:
+            print(f"[-] Bluetooth-адаптер недоступен или занят: {e}")
 
 def show_banner():
     banner_text = r"""
@@ -562,7 +566,7 @@ def show_banner():
 """
     print("\033[31m" + banner_text + "\033[0m")
     print("[+] TARGET ACQUIRED [+] INTEL-MODE ACTIVE [+] OSINT MODE\n")
-    print("========[ REIZE. v5.5.0 - ULTIMATE CYBER INTELLIGENCE PLATFORM ]========")
+    print("========[ REIZE. v5.6.0 - ULTIMATE CYBER INTELLIGENCE PLATFORM ]========")
     print(" Введите 'help' для просмотра команд или 'exit' для выхода.\n")
 
 if __name__ == "__main__":
