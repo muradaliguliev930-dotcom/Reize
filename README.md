@@ -1,5 +1,4 @@
-<img width="724" height="596" alt="image" src="https://github.com/user-attachments/assets/9e9f8398-9277-41fe-9f89-0332355b00c5" />
-
+<img width="908" height="264" alt="{8D233EF1-04C5-4DB6-8106-7D35C18C244D}" src="https://github.com/user-attachments/assets/cb813b24-89eb-421d-8df3-ff724cd62a74" />
 
 # REIZE v5.6.0 — Ultimate Cyber Intelligence Platform
 
