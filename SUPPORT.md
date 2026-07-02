@@ -1,12 +1,13 @@
-### Support
+### Support / Поддержка
 
-Thank you for using REIZE! If you need help, please use the official communication channels.
+Если у вас возникли вопросы по работе платформы REIZE или вам нужна помощь в настройке модулей, используйте официальные каналы связи.
 
-### Community & Discussion
+### 📢 Официальные ресурсы
 
-*   **Official Forum**: Talk about REIZE on Codeby.net.
-*   **Telegram Channel**: Get the latest updates and chat with the author.
+*   **Форум Codeby**: Обсуждение утилиты и гайды на Codeby.net
+*   **Разработчик**: PenHunter на GitHub
 
-### Bug Reports
+### ⚠️ Правила обращения
 
-Please use the GitHub Issues tab only for verified technical bugs.
+*   Для сообщения о багах и технических ошибках в коде используйте вкладку **Issues**.
+*   Для общих вопросов, предложений по BLE-разведке и интеграции новых фич пишите на форуме или в личные сообщения.
