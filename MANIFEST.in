@@ -1,0 +1,6 @@
+include LICENSE  
+include README.md  
+include CHANGELOG.md  
+include OWASP-METADATA.yml  
+recursive-include docs \*.md  
+global-exclude \*.py\[cod\] **pycache** .DS\_Store
