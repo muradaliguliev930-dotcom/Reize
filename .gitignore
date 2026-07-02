@@ -1,0 +1,22 @@
+### Python compiled files
+
+**pycache**/  
+\*.py\[cod\]  
+\*$py.class
+
+### Operating System files
+
+.DS\_Store  
+Thumbs.db  
+.desktop
+
+### IDE files
+
+.vscode/  
+.idea/
+
+### Local configuration & keys
+
+\*.env  
+secret\_keys.txt  
+config.local.json
