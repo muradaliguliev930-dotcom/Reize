@@ -1,3 +1,4 @@
+📋 Описание •🚀 Установка •⚙️ Модули •⚖️ Лицензия •👥 Авторы
 <img width="908" height="264" alt="{8D233EF1-04C5-4DB6-8106-7D35C18C244D}" src="https://github.com/user-attachments/assets/cb813b24-89eb-421d-8df3-ff724cd62a74" />
 
 # REIZE v5.6.0 — Ultimate Cyber Intelligence Platform
