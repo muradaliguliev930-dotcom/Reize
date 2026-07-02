@@ -1,0 +1,8 @@
+tool:  
+name: REIZE  
+version: 5.6.0  
+categories:  
+\- osint  
+\- ble-recon  
+\- vulnerability-scanner  
+platform: Kali Linux / Debian
